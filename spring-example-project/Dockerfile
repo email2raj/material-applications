@@ -7,7 +7,7 @@ FROM amazoncorretto:8
 EXPOSE 8080
 
 #Set the working dir inside the container
-WORKDIR /usr/src/app
+#WORKDIR /usr/src/app
 
 #Build the project with ./mvnw package
 RUN ./mvnw package
