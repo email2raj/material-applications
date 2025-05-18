@@ -1,17 +1,23 @@
-# 5-17-2025
-# install the java 8 from amazon docker hub - The project should open in 8080 and you get a message by pressing the button.
-
 FROM amazoncorretto:8
 
-#expose the port your app runs on
-EXPOSE 8080
+# Set working directory
+WORKDIR /usr/src/app
 
-#Set the working dir inside the container
-#WORKDIR /usr/src/app
+# Copy files needed to build the project
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src ./src
 
-#Build the project with ./mvnw package
+# Make mvnw executable
+RUN chmod +x ./mvnw
+
+# Build the project using mvnw
 RUN ./mvnw package
 
-#Run with java -jar ./target/docker-example-1.1.3.jar
+# Expose the port
+EXPOSE 8080
+
+# Run the application
 CMD ["java", "-jar", "./target/docker-example-1.1.3.jar"]
 
